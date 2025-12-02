@@ -30,6 +30,14 @@ export function Layout({ children, transparent = false }: { children: React.Reac
     : "text-foreground/80 hover:text-saffron";
   const activeNavLinkColor = "text-saffron font-bold";
 
+  const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "/properties", label: "Properties" },
+    { href: "/about", label: "About" },
+    { href: "/services", label: "Services" },
+    { href: "/contact", label: "Contact" },
+  ];
+
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground font-sans overflow-x-hidden">
       {/* Navigation */}
