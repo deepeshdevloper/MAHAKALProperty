@@ -19,13 +19,49 @@ export const theme = {
 
 // Motion Variants
 export const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 40 },
   visible: { 
     opacity: 1, 
     y: 0,
     transition: { 
-      duration: theme.motion.normal, 
-      ease: theme.motion.easing 
+      duration: 0.6, 
+      ease: [0.22, 1, 0.36, 1]
+    }
+  },
+};
+
+export const fadeInLeft: Variants = {
+  hidden: { opacity: 0, x: -40 },
+  visible: { 
+    opacity: 1, 
+    x: 0,
+    transition: { 
+      duration: 0.6, 
+      ease: [0.22, 1, 0.36, 1]
+    }
+  },
+};
+
+export const fadeInRight: Variants = {
+  hidden: { opacity: 0, x: 40 },
+  visible: { 
+    opacity: 1, 
+    x: 0,
+    transition: { 
+      duration: 0.6, 
+      ease: [0.22, 1, 0.36, 1]
+    }
+  },
+};
+
+export const scaleUp: Variants = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: { 
+    opacity: 1, 
+    scale: 1,
+    transition: { 
+      duration: 0.5, 
+      ease: [0.22, 1, 0.36, 1]
     }
   },
 };
@@ -35,7 +71,7 @@ export const staggerList: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: theme.motion.stagger,
+      staggerChildren: 0.1,
       delayChildren: 0.1,
     },
   },
@@ -44,14 +80,27 @@ export const staggerList: Variants = {
 export const cardHover: Variants = {
   rest: { scale: 1, y: 0 },
   hover: { 
-    scale: 1.03, 
-    y: -5,
-    boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5)",
+    scale: 1.02, 
+    y: -8,
+    boxShadow: "0 20px 30px -10px rgba(0, 0, 0, 0.15)",
     transition: { 
-      duration: theme.motion.normal, 
-      ease: theme.motion.uiEasing 
+      duration: 0.3, 
+      ease: "easeOut" 
     }
   },
+};
+
+export const buttonHover: Variants = {
+  rest: { scale: 1 },
+  hover: { 
+    scale: 1.05,
+    transition: { 
+      type: "spring",
+      stiffness: 400,
+      damping: 10
+    }
+  },
+  tap: { scale: 0.95 }
 };
 
 export const pageTransition: Variants = {

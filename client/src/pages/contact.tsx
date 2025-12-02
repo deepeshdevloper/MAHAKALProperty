@@ -5,7 +5,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useState } from "react";
-import { Loader2, CheckCircle } from "lucide-react";
+import { Loader2, CheckCircle, MapPin, Phone, Mail, Send } from "lucide-react";
+import { fadeInUp, staggerList, scaleUp, buttonHover } from "@/lib/theme";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -42,125 +43,166 @@ export default function Contact() {
 
       <div className="min-h-screen pt-24 pb-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-16 items-start">
+          <motion.div 
+            initial="hidden"
+            animate="visible"
+            variants={staggerList}
+            className="grid md:grid-cols-2 gap-16 items-start"
+          >
             {/* Contact Info */}
-            <div className="space-y-12">
+            <motion.div variants={fadeInUp} className="space-y-12">
               <div>
-                <h1 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-6">Get in Touch</h1>
-                <p className="text-gray-600 text-lg leading-relaxed">
+                <h1 className="text-5xl md:text-7xl font-serif font-bold text-gray-900 mb-6">Get in Touch</h1>
+                <p className="text-gray-600 text-xl leading-relaxed">
                   Ready to start your real estate journey? Visit our office or drop us a message. We are here to serve you with devotion.
                 </p>
               </div>
 
               <div className="space-y-8">
-                <div className="flex gap-6">
-                  <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center border border-gray-200 text-saffron shrink-0 shadow-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                  </div>
-                  <div>
-                    <h3 className="text-gray-900 font-bold text-lg">Head Office</h3>
-                    <p className="text-gray-600">Shop No. 52, Bajrang Market,<br/>BHEL, Bhopal, Pin Code: 462022</p>
-                  </div>
-                </div>
-
-                <div className="flex gap-6">
-                  <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center border border-gray-200 text-saffron shrink-0 shadow-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
-                  </div>
-                  <div>
-                    <h3 className="text-gray-900 font-bold text-lg">Contact Persons</h3>
-                    <p className="text-gray-600">Rahul Singh<br/>Rajesh Kushwaha</p>
-                  </div>
-                </div>
-
-                <div className="flex gap-6">
-                  <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center border border-gray-200 text-saffron shrink-0 shadow-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
-                  </div>
-                  <div>
-                    <h3 className="text-gray-900 font-bold text-lg">Phone / WhatsApp</h3>
-                    <p className="text-gray-600">+91 92430 23754</p>
-                  </div>
-                </div>
+                {[
+                  { 
+                    icon: MapPin, 
+                    title: "Head Office", 
+                    content: "Shop No. 52, Bajrang Market, BHEL, Bhopal, Pin Code: 462022" 
+                  },
+                  { 
+                    icon: UsersIcon, 
+                    title: "Contact Persons", 
+                    content: "Rahul Singh\nRajesh Kushwaha" 
+                  },
+                  { 
+                    icon: Phone, 
+                    title: "Phone / WhatsApp", 
+                    content: "+91 92430 23754" 
+                  }
+                ].map((item, i) => (
+                  <motion.div 
+                    key={i}
+                    whileHover={{ x: 10 }}
+                    className="flex gap-6 group cursor-default"
+                  >
+                    <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center border border-gray-200 text-saffron shrink-0 shadow-sm group-hover:bg-saffron group-hover:text-white transition-all duration-300">
+                      <item.icon className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <h3 className="text-gray-900 font-bold text-lg mb-1 group-hover:text-saffron transition-colors">{item.title}</h3>
+                      <p className="text-gray-600 whitespace-pre-line text-lg">{item.content}</p>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
-            </div>
+            </motion.div>
 
             {/* Form */}
-            <div className="bg-white p-8 md:p-10 rounded-3xl border border-gray-200 shadow-2xl relative overflow-hidden">
+            <motion.div 
+              variants={scaleUp}
+              className="bg-white p-8 md:p-12 rounded-[2.5rem] border border-gray-200 shadow-2xl relative overflow-hidden"
+            >
               {isSuccess ? (
                 <motion.div 
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   className="absolute inset-0 flex flex-col items-center justify-center bg-white z-20 text-center p-8"
                 >
-                  <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center text-green-600 mb-6">
-                    <CheckCircle className="w-10 h-10" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Request Sent!</h3>
-                  <p className="text-gray-600 mb-6">Our team will contact you shortly.</p>
-                  <button onClick={() => setIsSuccess(false)} className="text-saffron font-medium hover:underline">
+                  <motion.div 
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", stiffness: 200, damping: 10 }}
+                    className="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center text-green-600 mb-6"
+                  >
+                    <CheckCircle className="w-12 h-12" />
+                  </motion.div>
+                  <h3 className="text-3xl font-serif font-bold text-gray-900 mb-2">Request Sent!</h3>
+                  <p className="text-gray-600 mb-8 text-lg">Our team will contact you shortly.</p>
+                  <button onClick={() => setIsSuccess(false)} className="text-saffron font-bold text-lg hover:underline">
                     Send another message
                   </button>
                 </motion.div>
               ) : null}
 
-              <h3 className="text-2xl font-serif font-bold text-gray-900 mb-6">Send us a Message</h3>
+              <h3 className="text-3xl font-serif font-bold text-gray-900 mb-8">Send us a Message</h3>
               
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-700">Your Name</label>
+                    <label className="text-sm font-bold text-gray-700 uppercase tracking-wider">Your Name</label>
                     <input 
                       {...register("name")}
-                      className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:border-saffron focus:outline-none transition-colors"
+                      className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-4 text-gray-900 focus:border-saffron focus:ring-2 focus:ring-saffron/20 focus:outline-none transition-all font-medium"
                       placeholder="John Doe"
                     />
-                    {errors.name && <span className="text-red-500 text-xs">{errors.name.message}</span>}
+                    {errors.name && <span className="text-red-500 text-xs font-bold">{errors.name.message}</span>}
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-700">Phone Number</label>
+                    <label className="text-sm font-bold text-gray-700 uppercase tracking-wider">Phone Number</label>
                     <input 
                       {...register("phone")}
-                      className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:border-saffron focus:outline-none transition-colors"
+                      className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-4 text-gray-900 focus:border-saffron focus:ring-2 focus:ring-saffron/20 focus:outline-none transition-all font-medium"
                       placeholder="+91 9000000000"
                     />
-                    {errors.phone && <span className="text-red-500 text-xs">{errors.phone.message}</span>}
+                    {errors.phone && <span className="text-red-500 text-xs font-bold">{errors.phone.message}</span>}
                   </div>
                 </div>
                 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">Email Address</label>
+                  <label className="text-sm font-bold text-gray-700 uppercase tracking-wider">Email Address</label>
                   <input 
                     {...register("email")}
-                    className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:border-saffron focus:outline-none transition-colors"
+                    className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-4 text-gray-900 focus:border-saffron focus:ring-2 focus:ring-saffron/20 focus:outline-none transition-all font-medium"
                     placeholder="john@example.com"
                   />
-                  {errors.email && <span className="text-red-500 text-xs">{errors.email.message}</span>}
+                  {errors.email && <span className="text-red-500 text-xs font-bold">{errors.email.message}</span>}
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">Message</label>
+                  <label className="text-sm font-bold text-gray-700 uppercase tracking-wider">Message</label>
                   <textarea 
                     {...register("message")}
                     rows={4}
-                    className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:border-saffron focus:outline-none transition-colors resize-none"
+                    className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-4 text-gray-900 focus:border-saffron focus:ring-2 focus:ring-saffron/20 focus:outline-none transition-all resize-none font-medium"
                     placeholder="I'm interested in..."
                   />
-                  {errors.message && <span className="text-red-500 text-xs">{errors.message.message}</span>}
+                  {errors.message && <span className="text-red-500 text-xs font-bold">{errors.message.message}</span>}
                 </div>
 
-                <button 
+                <motion.button 
+                  variants={buttonHover}
+                  whileHover="hover"
+                  whileTap="tap"
                   type="submit" 
                   disabled={isSubmitting}
-                  className="w-full bg-saffron text-white font-bold py-4 rounded-lg hover:bg-saffron/90 transition-all flex items-center justify-center gap-2 disabled:opacity-70 shadow-lg"
+                  className="w-full bg-black text-white font-bold py-5 rounded-xl hover:bg-gray-900 transition-all flex items-center justify-center gap-2 disabled:opacity-70 shadow-lg text-lg"
                 >
-                  {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : "Send Message"}
-                </button>
+                  {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : <>Send Message <Send className="w-4 h-4" /></>}
+                </motion.button>
               </form>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </Layout>
   );
+}
+
+// Helper for Users icon since it wasn't imported
+function UsersIcon(props: any) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+      <circle cx="9" cy="7" r="4" />
+      <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+    </svg>
+  )
 }
