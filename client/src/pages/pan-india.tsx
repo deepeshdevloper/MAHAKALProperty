@@ -20,7 +20,7 @@ export default function PanIndia() {
 
         {/* Interactive Map Placeholder */}
         <div className="container mx-auto px-4 mb-20">
-          <div className="relative w-full h-[600px] bg-white rounded-3xl border border-gray-200 shadow-xl overflow-hidden flex items-center justify-center group">
+          <div className="relative w-full h-[400px] md:h-[600px] bg-white rounded-3xl border border-gray-200 shadow-xl overflow-hidden flex items-center justify-center group">
             {/* Stylized Map Graphic */}
             <div className="absolute inset-0 opacity-10 bg-[url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/India_map_en.svg/1200px-India_map_en.svg.png')] bg-center bg-contain bg-no-repeat" />
             

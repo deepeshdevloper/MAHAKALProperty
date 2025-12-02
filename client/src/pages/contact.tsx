@@ -42,7 +42,7 @@ export default function Contact() {
 
       <div className="min-h-screen pt-24 pb-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
+          <div className="grid md:grid-cols-2 gap-16 items-start">
             {/* Contact Info */}
             <div className="space-y-12">
               <div>

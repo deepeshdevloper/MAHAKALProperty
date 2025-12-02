@@ -197,7 +197,7 @@ export default function Home() {
                   variants={fadeInUp}
                   whileHover="hover"
                   initial="rest"
-                  className="group relative h-[450px] rounded-3xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-shadow duration-500"
+                  className="group relative h-[350px] md:h-[450px] rounded-3xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-shadow duration-500"
                 >
                   <motion.div 
                     variants={cardHover}
