@@ -46,7 +46,7 @@ export default function Contact() {
             {/* Contact Info */}
             <div className="space-y-12">
               <div>
-                <h1 className="text-5xl font-serif font-bold text-gray-900 mb-6">Get in Touch</h1>
+                <h1 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-6">Get in Touch</h1>
                 <p className="text-gray-600 text-lg leading-relaxed">
                   Ready to start your real estate journey? Visit our office or drop us a message. We are here to serve you with devotion.
                 </p>

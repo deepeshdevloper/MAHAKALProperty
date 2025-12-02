@@ -76,7 +76,7 @@ export default function Services() {
       <div className="pt-20 pb-32 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-20">
-            <h1 className="text-5xl font-serif font-bold text-gray-900 mb-6">Our Expertise</h1>
+            <h1 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-6">Our Expertise</h1>
             <p className="text-gray-600 max-w-2xl mx-auto">
               We offer end-to-end real estate solutions designed to make your property journey smooth and successful.
             </p>

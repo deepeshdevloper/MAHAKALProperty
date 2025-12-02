@@ -46,7 +46,7 @@ export default function Home() {
 
             <motion.h1 
               variants={fadeInUp}
-              className="text-5xl md:text-7xl font-serif font-bold leading-tight text-gray-900"
+              className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold leading-tight text-gray-900"
             >
               Find Your <span className="text-gradient-gold">Divine</span> Space
             </motion.h1>
@@ -95,7 +95,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuredProperties.map((prop) => (
               <motion.div 
                 key={prop.id}
@@ -185,7 +185,7 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={staggerList}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
             {[
               { name: "Bhopal", desc: "The City of Lakes", img: stockImageBhopal, link: "/city/bhopal" },
@@ -261,7 +261,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { icon: Map, title: "Property Buying", desc: "Expert guidance to find your dream home or investment." },
               { icon: TrendingUp, title: "Investment Advisory", desc: "Data-driven insights for high-yield property investments." },

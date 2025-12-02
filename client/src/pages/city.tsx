@@ -75,7 +75,7 @@ export default function CityPage() {
           <motion.h1 
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            className="text-6xl md:text-8xl font-serif font-bold text-white mb-4 drop-shadow-lg"
+            className="text-4xl md:text-6xl lg:text-8xl font-serif font-bold text-white mb-4 drop-shadow-lg"
           >
             {cityInfo.title}
           </motion.h1>

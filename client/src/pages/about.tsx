@@ -21,7 +21,7 @@ export default function About() {
             className="max-w-4xl mx-auto"
           >
             <motion.div variants={fadeInUp} className="text-center mb-16">
-              <h1 className="text-5xl md:text-6xl font-serif font-bold text-gray-900 mb-6">Our Legacy</h1>
+              <h1 className="text-4xl md:text-6xl font-serif font-bold text-gray-900 mb-6">Our Legacy</h1>
               <div className="w-24 h-1 bg-saffron mx-auto rounded-full" />
             </motion.div>
 
@@ -51,7 +51,7 @@ export default function About() {
               </motion.div>
             </div>
 
-            <motion.div variants={staggerList} className="grid md:grid-cols-3 gap-8">
+            <motion.div variants={staggerList} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 { title: "Mission", text: "To provide ethical, transparent, and high-value real estate solutions that empower our clients." },
                 { title: "Vision", text: "To be the most trusted real estate partner in Central India, known for our unwavering integrity." },

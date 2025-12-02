@@ -226,8 +226,8 @@ export function Layout({ children, transparent = false }: { children: React.Reac
               &copy; {new Date().getFullYear()} Jai Shree Mahakal Property
               Solutions. All rights reserved.
             </p>
-            <Link href="/admin">
-              <a className="hover:text-saffron transition-colors">Admin Login</a>
+            <Link href="/admin" className="hover:text-saffron transition-colors">
+              Admin Login
             </Link>
           </div>
         </div>
