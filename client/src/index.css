@@ -32,6 +32,9 @@
   --radius-lg: 1rem;
   --radius-xl: 1.5rem;
   --radius-2xl: 2rem;
+
+  --color-saffron: #FF9933;
+  --color-gold: #E2B552;
 }
 
 :root {
