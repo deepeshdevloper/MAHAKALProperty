@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
 import { Layout } from "@/components/layout";
 import { fadeInUp, staggerList } from "@/lib/theme";
+import officeImage from '@assets/generated_images/real_estate_office_storefront_with_signage.png';
 
 export default function About() {
   return (
@@ -40,11 +41,13 @@ export default function About() {
                   We believe that buying a home is a spiritual journey as much as a financial one. It is about finding the space where your life unfolds.
                 </p>
               </motion.div>
-              <motion.div variants={fadeInUp} className="relative h-[400px] rounded-2xl overflow-hidden bg-gray-200 shadow-lg">
-                 {/* Placeholder for About Image */}
-                 <div className="absolute inset-0 bg-gradient-to-br from-saffron/10 to-gray-100 flex items-center justify-center">
-                    <span className="text-gray-400 font-serif text-4xl">Our Story Image</span>
-                 </div>
+              <motion.div variants={fadeInUp} className="relative h-[400px] rounded-2xl overflow-hidden bg-gray-200 shadow-lg group">
+                 <img 
+                   src={officeImage} 
+                   alt="Jai Shree Mahakal Property Solutions Office" 
+                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                 />
+                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60" />
               </motion.div>
             </div>
 
