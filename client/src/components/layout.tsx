@@ -190,11 +190,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <ul className="space-y-3 text-sm text-white/60">
                 <li className="flex items-center gap-3">
                   <MapPin className="w-4 h-4 text-saffron" />
-                  <span>Main Market, Vidisha, MP 464001</span>
+                  <span>Shop No. 52, Bajrang Market, BHEL, Bhopal - 462022</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Phone className="w-4 h-4 text-saffron" />
-                  <span>+91 98765 43210</span>
+                  <span>+91 92430 23754</span>
                 </li>
                 <li className="flex gap-4 mt-4">
                   <a
@@ -225,7 +225,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
       {/* Floating WhatsApp */}
       <motion.a
-        href="https://wa.me/919876543210"
+        href="https://wa.me/919243023754"
         target="_blank"
         rel="noopener noreferrer"
         initial={{ scale: 0 }}

@@ -59,7 +59,17 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="text-gray-900 font-bold text-lg">Head Office</h3>
-                    <p className="text-gray-600">123 Mahakal Marg, Near Main Temple,<br/>Vidisha, Madhya Pradesh 464001</p>
+                    <p className="text-gray-600">Shop No. 52, Bajrang Market,<br/>BHEL, Bhopal, Pin Code: 462022</p>
+                  </div>
+                </div>
+
+                <div className="flex gap-6">
+                  <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center border border-gray-200 text-saffron shrink-0 shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                  </div>
+                  <div>
+                    <h3 className="text-gray-900 font-bold text-lg">Contact Persons</h3>
+                    <p className="text-gray-600">Rahul Singh<br/>Rajesh Kushwaha</p>
                   </div>
                 </div>
 
@@ -68,8 +78,8 @@ export default function Contact() {
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
                   </div>
                   <div>
-                    <h3 className="text-gray-900 font-bold text-lg">Phone</h3>
-                    <p className="text-gray-600">+91 98765 43210<br/>+91 7592 234567</p>
+                    <h3 className="text-gray-900 font-bold text-lg">Phone / WhatsApp</h3>
+                    <p className="text-gray-600">+91 92430 23754</p>
                   </div>
                 </div>
               </div>
