@@ -11,6 +11,7 @@ import Services from "@/pages/services";
 import CityPage from "@/pages/city";
 import PanIndia from "@/pages/pan-india";
 import Contact from "@/pages/contact";
+import AdminPage from "@/pages/admin";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -22,6 +23,7 @@ function Router() {
         <Route path="/services" component={Services} />
         <Route path="/pan-india" component={PanIndia} />
         <Route path="/contact" component={Contact} />
+        <Route path="/admin" component={AdminPage} />
         <Route path="/city/:name" component={CityPage} />
         <Route component={NotFound} />
       </Switch>

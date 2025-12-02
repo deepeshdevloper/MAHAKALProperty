@@ -214,11 +214,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </div>
           </div>
 
-          <div className="border-t border-white/10 pt-8 text-center text-xs text-white/30">
+            <div className="border-t border-white/10 pt-8 text-center text-xs text-white/30 flex flex-col md:flex-row justify-between items-center gap-4">
             <p>
               &copy; {new Date().getFullYear()} Jai Shree Mahakal Property
               Solutions. All rights reserved.
             </p>
+            <Link href="/admin">
+              <a className="hover:text-saffron transition-colors">Admin Login</a>
+            </Link>
           </div>
         </div>
       </footer>
