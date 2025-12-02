@@ -3,6 +3,7 @@ import { useRoute, Link } from "wouter";
 import { Layout } from "@/components/layout";
 import { motion } from "framer-motion";
 import { MapPin, Bed, Bath, Maximize, ArrowRight } from "lucide-react";
+import { useProperties } from "@/lib/property-context";
 
 // Mock Data
 const CITY_DATA: Record<string, { title: string, desc: string, stats: any[] }> = {
@@ -35,46 +36,17 @@ const CITY_DATA: Record<string, { title: string, desc: string, stats: any[] }> =
   }
 };
 
-const SAMPLE_PROPERTIES = [
-  {
-    id: 1,
-    title: "Luxury Villa with Garden",
-    location: "Arera Colony, Bhopal",
-    price: "₹1.5 Cr",
-    beds: 4,
-    baths: 3,
-    area: "2400 sqft",
-    image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1000&auto=format&fit=crop",
-    type: "Residential"
-  },
-  {
-    id: 2,
-    title: "Premium Commercial Space",
-    location: "MP Nagar, Bhopal",
-    price: "₹85 Lakh",
-    beds: 0,
-    baths: 1,
-    area: "1200 sqft",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1000&auto=format&fit=crop",
-    type: "Commercial"
-  },
-  {
-    id: 3,
-    title: "Modern Apartment",
-    location: "Civil Lines, Vidisha",
-    price: "₹35 Lakh",
-    beds: 2,
-    baths: 2,
-    area: "1100 sqft",
-    image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1000&auto=format&fit=crop",
-    type: "Residential"
-  },
-];
-
 export default function CityPage() {
   const [match, params] = useRoute("/city/:name");
   const cityName = params?.name?.toLowerCase() || "bhopal";
   const cityInfo = CITY_DATA[cityName] || CITY_DATA["bhopal"];
+  const { properties } = useProperties();
+
+  // Filter properties by city (simple case-insensitive match)
+  const cityProperties = properties.filter(
+    p => (p.city?.toLowerCase() === cityName) || 
+         p.location.toLowerCase().includes(cityName)
+  );
 
   return (
     <Layout>
@@ -127,7 +99,7 @@ export default function CityPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {SAMPLE_PROPERTIES.map((prop) => (
+          {cityProperties.map((prop) => (
             <motion.div 
               key={prop.id}
               initial={{ opacity: 0, y: 20 }}
@@ -153,7 +125,10 @@ export default function CityPage() {
               </div>
               
               <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-1">{prop.title}</h3>
+                <div className="flex justify-between items-start mb-2">
+                   <h3 className="text-xl font-bold text-gray-900 line-clamp-1">{prop.title}</h3>
+                   {prop.status === 'Sold' && <span className="bg-red-100 text-red-700 text-xs font-bold px-2 py-1 rounded">SOLD</span>}
+                </div>
                 <div className="flex items-center gap-2 text-gray-600 text-sm mb-4">
                   <MapPin className="w-4 h-4 text-saffron" />
                   {prop.location}
@@ -180,6 +155,11 @@ export default function CityPage() {
               </div>
             </motion.div>
           ))}
+          {cityProperties.length === 0 && (
+            <div className="col-span-full text-center py-20">
+               <p className="text-gray-500 text-lg">No properties listed in this city yet.</p>
+            </div>
+          )}
         </div>
       </div>
     </Layout>

@@ -21,58 +21,7 @@ import {
   Filter
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-
-// Mock Data for initial state
-const INITIAL_PROPERTIES = [
-  {
-    id: 1,
-    title: "Luxury Villa with Garden",
-    location: "Arera Colony, Bhopal",
-    price: "1.5 Cr",
-    type: "Residential",
-    beds: 4,
-    baths: 3,
-    area: "2400 sqft",
-    image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1000&auto=format&fit=crop",
-    status: "Available"
-  },
-  {
-    id: 2,
-    title: "Premium Commercial Space",
-    location: "MP Nagar, Bhopal",
-    price: "85 Lakh",
-    type: "Commercial",
-    beds: 0,
-    baths: 1,
-    area: "1200 sqft",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1000&auto=format&fit=crop",
-    status: "Available"
-  },
-  {
-    id: 3,
-    title: "Modern Apartment",
-    location: "Civil Lines, Vidisha",
-    price: "35 Lakh",
-    type: "Residential",
-    beds: 2,
-    baths: 2,
-    area: "1100 sqft",
-    image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1000&auto=format&fit=crop",
-    status: "Sold"
-  },
-  {
-    id: 4,
-    title: "Agricultural Land",
-    location: "Sanchi Road, Raisen",
-    price: "45 Lakh",
-    type: "Land",
-    beds: 0,
-    baths: 0,
-    area: "2 Acres",
-    image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1000&auto=format&fit=crop",
-    status: "Available"
-  }
-];
+import { useProperties, Property } from "@/lib/property-context";
 
 const propertySchema = z.object({
   title: z.string().min(3, "Title is required"),
@@ -83,13 +32,14 @@ const propertySchema = z.object({
   baths: z.coerce.number().min(0),
   area: z.string().min(1, "Area is required"),
   image: z.string().url("Must be a valid URL").optional().or(z.literal("")),
-  status: z.enum(["Available", "Sold", "Pending"])
+  status: z.enum(["Available", "Sold", "Pending"]),
+  city: z.string().optional()
 });
 
 type PropertyForm = z.infer<typeof propertySchema>;
 
 export default function AdminPage() {
-  const [properties, setProperties] = useState(INITIAL_PROPERTIES);
+  const { properties, addProperty, updateProperty, deleteProperty } = useProperties();
   const [isEditing, setIsEditing] = useState<number | null>(null);
   const [isAdding, setIsAdding] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -106,7 +56,8 @@ export default function AdminPage() {
       baths: 0,
       area: "",
       image: "",
-      status: "Available"
+      status: "Available",
+      city: "bhopal"
     }
   });
 
@@ -115,7 +66,7 @@ export default function AdminPage() {
     p.location.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleEdit = (property: any) => {
+  const handleEdit = (property: Property) => {
     setIsEditing(property.id);
     setIsAdding(false);
     setValue("title", property.title);
@@ -127,11 +78,12 @@ export default function AdminPage() {
     setValue("area", property.area);
     setValue("image", property.image);
     setValue("status", property.status);
+    setValue("city", property.city || "bhopal");
   };
 
   const handleDelete = (id: number) => {
     if (window.confirm("Are you sure you want to delete this property?")) {
-      setProperties(properties.filter(p => p.id !== id));
+      deleteProperty(id);
       toast({
         title: "Property Deleted",
         description: "The property has been removed from the listing.",
@@ -142,17 +94,18 @@ export default function AdminPage() {
 
   const onSubmit = (data: PropertyForm) => {
     if (isEditing) {
-      setProperties(properties.map(p => 
-        p.id === isEditing ? { ...p, ...data, id: isEditing } : p
-      ));
+      updateProperty(isEditing, data);
       setIsEditing(null);
       toast({
         title: "Property Updated",
         description: "Changes have been saved successfully.",
       });
     } else {
-      const newId = Math.max(...properties.map(p => p.id), 0) + 1;
-      setProperties([{ ...data, id: newId, image: data.image || "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1000&auto=format&fit=crop" }, ...properties]);
+      addProperty({
+        ...data,
+        image: data.image || "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1000&auto=format&fit=crop",
+        city: data.city || "bhopal"
+      });
       setIsAdding(false);
       toast({
         title: "Property Added",
@@ -374,6 +327,18 @@ export default function AdminPage() {
                             placeholder="sqft"
                           />
                         </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">City</label>
+                        <select 
+                          {...register("city")}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-saffron"
+                        >
+                          <option value="bhopal">Bhopal</option>
+                          <option value="vidisha">Vidisha</option>
+                          <option value="raisen">Raisen</option>
+                        </select>
                       </div>
 
                       <div>
