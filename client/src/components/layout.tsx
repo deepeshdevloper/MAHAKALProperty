@@ -41,35 +41,34 @@ export function Layout({ children }: { children: React.ReactNode }) {
         }`}
       >
         <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-          <Link href="/">
-            <a className="flex items-center gap-4 group">
-              {/* Logo: Use light variant (dark lines) for light theme header */}
-              <Logo
-                className="w-16 h-16 md:w-20 md:h-20 text-saffron drop-shadow-sm"
-                variant="light"
-              />
-              <div className="flex flex-col">
-                <span className="font-serif text-2xl md:text-3xl font-bold tracking-wide text-foreground group-hover:text-saffron transition-colors leading-none">
-                  JAI SHREE MAHAKAL
-                </span>
-                <span className="text-xs md:text-sm uppercase tracking-[0.2em] text-muted-foreground group-hover:text-saffron transition-colors mt-1">
-                  Property Solutions
-                </span>
-              </div>
-            </a>
+          <Link href="/" className="flex items-center gap-4 group">
+            {/* Logo: Use light variant (dark lines) for light theme header */}
+            <Logo
+              className="w-16 h-16 md:w-20 md:h-20 text-saffron drop-shadow-sm"
+              variant="light"
+            />
+            <div className="flex flex-col">
+              <span className="font-serif text-2xl md:text-3xl font-bold tracking-wide text-foreground group-hover:text-saffron transition-colors leading-none">
+                JAI SHREE MAHAKAL
+              </span>
+              <span className="text-xs md:text-sm uppercase tracking-[0.2em] text-muted-foreground group-hover:text-saffron transition-colors mt-1">
+                Property Solutions
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <Link key={link.href} href={link.href}>
-                <a
-                  className={`text-base font-medium tracking-wide transition-colors hover:text-saffron relative py-1 ${
-                    location === link.href
-                      ? "text-saffron font-bold"
-                      : "text-foreground/80"
-                  }`}
-                >
+              <Link 
+                key={link.href} 
+                href={link.href}
+                className={`text-base font-medium tracking-wide transition-colors hover:text-saffron relative py-1 ${
+                  location === link.href
+                    ? "text-saffron font-bold"
+                    : "text-foreground/80"
+                }`}
+              >
                   {link.label}
                   {location === link.href && (
                     <motion.div
@@ -77,14 +76,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
                       className="absolute bottom-0 left-0 right-0 h-0.5 bg-saffron"
                     />
                   )}
-                </a>
               </Link>
             ))}
 
-            <Link href="/contact">
-              <a className="bg-saffron hover:bg-saffron/90 text-black font-bold px-6 py-3 rounded-full text-sm transition-transform hover:scale-105 shadow-lg shadow-saffron/20 whitespace-nowrap">
+            <Link href="/contact" className="bg-saffron hover:bg-saffron/90 text-black font-bold px-6 py-3 rounded-full text-sm transition-transform hover:scale-105 shadow-lg shadow-saffron/20 whitespace-nowrap">
                 Get in Touch
-              </a>
             </Link>
           </nav>
 
@@ -110,13 +106,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
           >
             <nav className="flex flex-col gap-6 text-center">
               {navLinks.map((link) => (
-                <Link key={link.href} href={link.href}>
-                  <a
-                    className="text-2xl font-serif text-foreground hover:text-saffron"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
+                <Link 
+                  key={link.href} 
+                  href={link.href}
+                  className="text-2xl font-serif text-foreground hover:text-saffron"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
                     {link.label}
-                  </a>
                 </Link>
               ))}
             </nav>
@@ -148,29 +144,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <h4 className="text-saffron font-serif mb-4">Quick Links</h4>
               <ul className="space-y-2 text-sm text-white/60">
                 <li>
-                  <Link href="/">
-                    <a className="hover:text-saffron transition-colors">Home</a>
-                  </Link>
+                  <Link href="/" className="hover:text-saffron transition-colors">Home</Link>
                 </li>
                 <li>
-                  <Link href="/about">
-                    <a className="hover:text-saffron transition-colors">
+                  <Link href="/about" className="hover:text-saffron transition-colors">
                       About Us
-                    </a>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/services">
-                    <a className="hover:text-saffron transition-colors">
+                  <Link href="/services" className="hover:text-saffron transition-colors">
                       Services
-                    </a>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/pan-india">
-                    <a className="hover:text-saffron transition-colors">
+                  <Link href="/pan-india" className="hover:text-saffron transition-colors">
                       Pan-India Projects
-                    </a>
                   </Link>
                 </li>
               </ul>
@@ -180,24 +168,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <h4 className="text-saffron font-serif mb-4">Cities</h4>
               <ul className="space-y-2 text-sm text-white/60">
                 <li>
-                  <Link href="/city/bhopal">
-                    <a className="hover:text-saffron transition-colors">
+                  <Link href="/city/bhopal" className="hover:text-saffron transition-colors">
                       Bhopal Real Estate
-                    </a>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/city/vidisha">
-                    <a className="hover:text-saffron transition-colors">
+                  <Link href="/city/vidisha" className="hover:text-saffron transition-colors">
                       Vidisha Properties
-                    </a>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/city/raisen">
-                    <a className="hover:text-saffron transition-colors">
+                  <Link href="/city/raisen" className="hover:text-saffron transition-colors">
                       Raisen Opportunities
-                    </a>
                   </Link>
                 </li>
               </ul>

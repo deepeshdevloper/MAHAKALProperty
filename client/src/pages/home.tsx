@@ -56,15 +56,11 @@ export default function Home() {
             </motion.p>
 
             <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-              <Link href="/services">
-                <a className="px-8 py-4 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg flex items-center gap-2 justify-center">
+              <Link href="/services" className="px-8 py-4 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg flex items-center gap-2 justify-center">
                   Explore Properties <ArrowRight className="w-4 h-4" />
-                </a>
               </Link>
-              <Link href="/contact">
-                <a className="px-8 py-4 border border-gray-300 text-gray-900 font-medium rounded-full hover:bg-gray-100 transition-all flex items-center gap-2 justify-center">
+              <Link href="/contact" className="px-8 py-4 border border-gray-300 text-gray-900 font-medium rounded-full hover:bg-gray-100 transition-all flex items-center gap-2 justify-center">
                   Book Consultation
-                </a>
               </Link>
             </motion.div>
           </motion.div>
@@ -166,10 +162,8 @@ export default function Home() {
               <h2 className="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-4">Our Services</h2>
               <p className="text-gray-600 max-w-md">Comprehensive real estate solutions tailored to your needs.</p>
             </div>
-            <Link href="/services">
-              <a className="text-saffron hover:text-gray-900 transition-colors flex items-center gap-2 mt-4 md:mt-0">
+            <Link href="/services" className="text-saffron hover:text-gray-900 transition-colors flex items-center gap-2 mt-4 md:mt-0">
                 View All Services <ArrowRight className="w-4 h-4" />
-              </a>
             </Link>
           </div>
 
@@ -204,10 +198,8 @@ export default function Home() {
             <p className="text-gray-700 mb-8 text-lg font-medium">
               Whether you are looking for a home in Bhopal or land in Raisen, we are here to guide you.
             </p>
-            <Link href="/contact">
-              <a className="inline-flex items-center justify-center px-8 py-4 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-colors shadow-lg">
+            <Link href="/contact" className="inline-flex items-center justify-center px-8 py-4 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-colors shadow-lg">
                 Contact Us Today
-              </a>
             </Link>
           </div>
         </div>

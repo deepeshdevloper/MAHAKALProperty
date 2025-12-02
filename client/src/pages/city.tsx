@@ -174,10 +174,8 @@ export default function CityPage() {
                   </div>
                 </div>
 
-                <Link href="/contact">
-                  <a className="w-full block text-center bg-gray-100 hover:bg-saffron hover:text-white text-gray-900 py-3 rounded-lg transition-colors font-medium">
+                <Link href="/contact" className="w-full block text-center bg-gray-100 hover:bg-saffron hover:text-white text-gray-900 py-3 rounded-lg transition-colors font-medium">
                     View Details
-                  </a>
                 </Link>
               </div>
             </motion.div>
