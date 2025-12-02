@@ -4,9 +4,12 @@ import { Layout } from "@/components/layout";
 import { motion } from "framer-motion";
 import { MapPin, Bed, Bath, Maximize, ArrowRight } from "lucide-react";
 import { useProperties } from "@/lib/property-context";
+import stockImageBhopal from '@assets/stock_images/bhopal_city_landmark_352490aa.jpg';
+import stockImageVidisha from '@assets/stock_images/vidisha_india_ancien_3af2e5ab.jpg';
+import stockImageRaisen from '@assets/stock_images/raisen_fort_india_or_fa5b3019.jpg';
 
 // Mock Data
-const CITY_DATA: Record<string, { title: string, desc: string, stats: any[] }> = {
+const CITY_DATA: Record<string, { title: string, desc: string, stats: any[], image: string }> = {
   bhopal: {
     title: "Bhopal",
     desc: "The City of Lakes offers a perfect blend of nature and modern infrastructure.",
@@ -14,7 +17,8 @@ const CITY_DATA: Record<string, { title: string, desc: string, stats: any[] }> =
       { label: "Avg Price/sqft", value: "₹3,500" },
       { label: "New Projects", value: "45+" },
       { label: "Rental Yield", value: "3.5%" },
-    ]
+    ],
+    image: stockImageBhopal
   },
   vidisha: {
     title: "Vidisha",
@@ -23,7 +27,8 @@ const CITY_DATA: Record<string, { title: string, desc: string, stats: any[] }> =
       { label: "Avg Price/sqft", value: "₹2,200" },
       { label: "New Projects", value: "12+" },
       { label: "Growth Rate", value: "8.2%" },
-    ]
+    ],
+    image: stockImageVidisha
   },
   raisen: {
     title: "Raisen",
@@ -32,7 +37,8 @@ const CITY_DATA: Record<string, { title: string, desc: string, stats: any[] }> =
       { label: "Avg Price/sqft", value: "₹1,800" },
       { label: "Land Available", value: "High" },
       { label: "Appreciation", value: "10%" },
-    ]
+    ],
+    image: stockImageRaisen
   }
 };
 
@@ -49,7 +55,7 @@ export default function CityPage() {
   );
 
   return (
-    <Layout>
+    <Layout transparent={true}>
       <Helmet>
         <title>Real Estate in {cityInfo.title} | JSM Properties</title>
       </Helmet>
@@ -59,7 +65,7 @@ export default function CityPage() {
         <div className="absolute inset-0">
            <div className="w-full h-full bg-black/40 absolute inset-0 z-10" />
            <img 
-             src={`https://source.unsplash.com/1600x900/?${cityName},india,city`} 
+             src={cityInfo.image} 
              className="w-full h-full object-cover"
              alt={cityName}
            />

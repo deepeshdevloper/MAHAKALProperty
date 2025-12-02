@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone, Instagram, Facebook, MapPin } from "lucide-react";
 import { theme } from "@/lib/theme";
 
-export function Layout({ children }: { children: React.ReactNode }) {
+export function Layout({ children, transparent = false }: { children: React.ReactNode; transparent?: boolean }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [location] = useLocation();
@@ -18,18 +18,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu on route change
-  useEffect(() => {
-    setMobileMenuOpen(false);
-  }, [location]);
-
-  const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/properties", label: "Properties" },
-    { href: "/about", label: "About" },
-    { href: "/services", label: "Services" },
-    { href: "/contact", label: "Contact" },
-  ];
+  // Determine header style based on transparent prop and scroll state
+  const isTransparentState = transparent && !isScrolled;
+  
+  // Text colors
+  const textColorClass = isTransparentState ? "text-white" : "text-foreground";
+  const logoVariant = isTransparentState ? "dark" : "light"; // "dark" variant is white logo for dark backgrounds
+  const subTextColorClass = isTransparentState ? "text-white/80" : "text-muted-foreground";
+  const navLinkColor = isTransparentState 
+    ? "text-white hover:text-saffron" 
+    : "text-foreground/80 hover:text-saffron";
+  const activeNavLinkColor = "text-saffron font-bold";
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground font-sans overflow-x-hidden">
@@ -43,16 +42,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
       >
         <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-4 group">
-            {/* Logo: Use light variant (dark lines) for light theme header */}
             <Logo
               className="w-16 h-16 md:w-20 md:h-20 text-saffron drop-shadow-sm"
-              variant="light"
+              variant={logoVariant}
             />
             <div className="flex flex-col">
-              <span className="font-serif text-2xl md:text-3xl font-bold tracking-wide text-foreground group-hover:text-saffron transition-colors leading-none">
+              <span className={`font-serif text-2xl md:text-3xl font-bold tracking-wide transition-colors leading-none ${textColorClass} group-hover:text-saffron`}>
                 JAI SHREE MAHAKAL
               </span>
-              <span className="text-xs md:text-sm uppercase tracking-[0.2em] text-muted-foreground group-hover:text-saffron transition-colors mt-1">
+              <span className={`text-xs md:text-sm uppercase tracking-[0.2em] transition-colors mt-1 ${subTextColorClass} group-hover:text-saffron`}>
                 Property Solutions
               </span>
             </div>
@@ -64,10 +62,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <Link 
                 key={link.href} 
                 href={link.href}
-                className={`text-base font-medium tracking-wide transition-colors hover:text-saffron relative py-1 ${
+                className={`text-base font-medium tracking-wide transition-colors relative py-1 ${
                   location === link.href
-                    ? "text-saffron font-bold"
-                    : "text-foreground/80"
+                    ? activeNavLinkColor
+                    : navLinkColor
                 }`}
               >
                   {link.label}
@@ -87,11 +85,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
           {/* Mobile Toggle */}
           <button
-            className="md:hidden text-foreground p-2"
+            className={`md:hidden p-2 ${textColorClass}`}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <X /> : <Menu />}
+            {mobileMenuOpen ? <X className="text-foreground" /> : <Menu />}
           </button>
         </div>
       </header>
