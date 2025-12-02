@@ -105,51 +105,53 @@ export default function CityPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              whileHover={{ y: -5 }}
-              className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-md hover:shadow-xl group"
+              whileHover={{ y: -8 }}
+              className="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-premium group transition-all duration-300"
             >
-              <div className="h-64 relative overflow-hidden">
+              <div className="h-72 relative overflow-hidden">
                 <img 
                   src={prop.image} 
                   alt={prop.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                 />
-                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-xs text-gray-900 font-medium shadow-sm">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
+                
+                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-gray-900 shadow-sm">
                   {prop.type}
                 </div>
                 <div className="absolute bottom-4 left-4">
-                  <span className="bg-saffron text-white font-bold px-3 py-1 rounded shadow-lg">
+                  <span className="bg-saffron text-white font-bold px-4 py-2 rounded-lg shadow-lg text-lg">
                     {prop.price}
                   </span>
                 </div>
               </div>
               
-              <div className="p-6">
-                <div className="flex justify-between items-start mb-2">
-                   <h3 className="text-xl font-bold text-gray-900 line-clamp-1">{prop.title}</h3>
+              <div className="p-8">
+                <div className="flex justify-between items-start mb-3">
+                   <h3 className="text-xl font-bold text-gray-900 line-clamp-1 group-hover:text-saffron transition-colors">{prop.title}</h3>
                    {prop.status === 'Sold' && <span className="bg-red-100 text-red-700 text-xs font-bold px-2 py-1 rounded">SOLD</span>}
                 </div>
-                <div className="flex items-center gap-2 text-gray-600 text-sm mb-4">
+                <div className="flex items-center gap-2 text-gray-500 text-sm mb-6 font-medium">
                   <MapPin className="w-4 h-4 text-saffron" />
                   {prop.location}
                 </div>
                 
-                <div className="grid grid-cols-3 gap-4 py-4 border-t border-gray-100 mb-4">
-                  <div className="flex flex-col items-center">
-                    <Bed className="w-5 h-5 text-gray-400 mb-1" />
-                    <span className="text-xs text-gray-600">{prop.beds} Beds</span>
+                <div className="grid grid-cols-3 gap-4 py-6 border-t border-gray-100 mb-6">
+                  <div className="flex flex-col items-center gap-1">
+                    <Bed className="w-5 h-5 text-gray-400 group-hover:text-saffron transition-colors" />
+                    <span className="text-xs font-medium text-gray-600">{prop.beds} Beds</span>
                   </div>
-                  <div className="flex flex-col items-center">
-                    <Bath className="w-5 h-5 text-gray-400 mb-1" />
-                    <span className="text-xs text-gray-600">{prop.baths} Baths</span>
+                  <div className="flex flex-col items-center gap-1">
+                    <Bath className="w-5 h-5 text-gray-400 group-hover:text-saffron transition-colors" />
+                    <span className="text-xs font-medium text-gray-600">{prop.baths} Baths</span>
                   </div>
-                  <div className="flex flex-col items-center">
-                    <Maximize className="w-5 h-5 text-gray-400 mb-1" />
-                    <span className="text-xs text-gray-600">{prop.area}</span>
+                  <div className="flex flex-col items-center gap-1">
+                    <Maximize className="w-5 h-5 text-gray-400 group-hover:text-saffron transition-colors" />
+                    <span className="text-xs font-medium text-gray-600">{prop.area}</span>
                   </div>
                 </div>
 
-                <Link href="/contact" className="w-full block text-center bg-gray-100 hover:bg-saffron hover:text-white text-gray-900 py-3 rounded-lg transition-colors font-medium">
+                <Link href="/contact" className="w-full block text-center bg-gray-50 border border-gray-200 hover:bg-saffron hover:border-saffron hover:text-white text-gray-900 py-4 rounded-xl transition-all font-bold tracking-wide">
                     View Details
                 </Link>
               </div>

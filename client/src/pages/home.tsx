@@ -56,10 +56,10 @@ export default function Home() {
             </motion.p>
 
             <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-              <Link href="/services" className="px-8 py-4 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg flex items-center gap-2 justify-center">
+              <Link href="/services" className="px-8 py-4 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg flex items-center gap-2 justify-center hover:shadow-xl hover:shadow-saffron/20">
                   Explore Properties <ArrowRight className="w-4 h-4" />
               </Link>
-              <Link href="/contact" className="px-8 py-4 border border-gray-300 text-gray-900 font-medium rounded-full hover:bg-gray-100 transition-all flex items-center gap-2 justify-center">
+              <Link href="/contact" className="px-8 py-4 border-2 border-gray-200 text-gray-900 font-medium rounded-full hover:bg-gray-50 hover:border-gray-300 transition-all flex items-center gap-2 justify-center">
                   Book Consultation
               </Link>
             </motion.div>
@@ -103,7 +103,7 @@ export default function Home() {
                   variants={fadeInUp}
                   whileHover="hover"
                   initial="rest"
-                  className="group relative h-[400px] rounded-2xl overflow-hidden cursor-pointer shadow-xl"
+                  className="group relative h-[450px] rounded-3xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-shadow duration-500"
                 >
                   <motion.div 
                     variants={cardHover}
@@ -116,15 +116,15 @@ export default function Home() {
                       loading="lazy"
                     />
                     {/* Stronger gradient for better text contrast */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90" />
                   </motion.div>
                   
-                  <div className="absolute bottom-0 left-0 right-0 p-8">
+                  <div className="absolute bottom-0 left-0 right-0 p-8 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
                     <h3 className="text-3xl font-serif font-bold text-white mb-2 drop-shadow-md">{city.name}</h3>
-                    <p className="text-white/90 mb-6 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 font-medium drop-shadow-sm">
+                    <p className="text-white/90 mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 font-medium drop-shadow-sm leading-relaxed">
                       {city.desc}
                     </p>
-                    <span className="bg-white text-black text-sm font-bold uppercase tracking-wider flex items-center gap-2 w-fit px-5 py-2.5 rounded-full shadow-lg hover:bg-saffron hover:text-white transition-colors">
+                    <span className="bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm font-bold uppercase tracking-wider flex items-center gap-2 w-fit px-6 py-3 rounded-full hover:bg-saffron hover:border-saffron hover:text-white transition-all duration-300">
                       View Properties <ArrowRight className="w-4 h-4" />
                     </span>
                   </div>
@@ -175,14 +175,16 @@ export default function Home() {
             ].map((service, i) => (
               <motion.div
                 key={i}
-                whileHover={{ y: -10 }}
-                className="bg-white p-8 rounded-2xl border border-gray-100 shadow-md hover:shadow-xl hover:border-saffron/30 transition-all group"
+                whileHover={{ y: -8 }}
+                className="bg-white p-10 rounded-3xl border border-gray-100 shadow-sm hover:shadow-premium transition-all group relative overflow-hidden"
               >
-                <div className="w-12 h-12 bg-saffron/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-saffron text-saffron group-hover:text-white transition-colors">
-                  <service.icon className="w-6 h-6" />
+                <div className="absolute top-0 right-0 w-24 h-24 bg-saffron/5 rounded-bl-full -mr-4 -mt-4 group-hover:bg-saffron/10 transition-colors" />
+                
+                <div className="w-14 h-14 bg-saffron/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-saffron text-saffron group-hover:text-white transition-colors shadow-sm">
+                  <service.icon className="w-7 h-7" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
-                <p className="text-gray-600 leading-relaxed mb-4">{service.desc}</p>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-saffron transition-colors">{service.title}</h3>
+                <p className="text-gray-600 leading-relaxed mb-4 text-lg">{service.desc}</p>
               </motion.div>
             ))}
           </div>
