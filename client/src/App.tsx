@@ -13,6 +13,7 @@ import CityPage from "@/pages/city";
 import PanIndia from "@/pages/pan-india";
 import Contact from "@/pages/contact";
 import AdminPage from "@/pages/admin";
+import PropertiesPage from "@/pages/properties";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -20,6 +21,7 @@ function Router() {
     <AnimatePresence mode="wait">
       <Switch>
         <Route path="/" component={Home} />
+        <Route path="/properties" component={PropertiesPage} />
         <Route path="/about" component={About} />
         <Route path="/services" component={Services} />
         <Route path="/pan-india" component={PanIndia} />

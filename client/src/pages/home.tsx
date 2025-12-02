@@ -2,13 +2,17 @@ import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
 import { Layout } from "@/components/layout";
 import { theme, fadeInUp, staggerList, cardHover } from "@/lib/theme";
-import { ArrowRight, Map, Shield, TrendingUp, Users } from "lucide-react";
+import { ArrowRight, Map, Shield, TrendingUp, Users, Bed, Bath, Maximize, MapPin } from "lucide-react";
 import { Link } from "wouter";
+import { useProperties } from "@/lib/property-context";
 import stockImageBhopal from '@assets/stock_images/bhopal_city_landmark_352490aa.jpg';
 import stockImageVidisha from '@assets/stock_images/vidisha_india_ancien_3af2e5ab.jpg';
 import stockImageRaisen from '@assets/stock_images/raisen_fort_india_or_fa5b3019.jpg';
 
 export default function Home() {
+  const { properties } = useProperties();
+  const featuredProperties = properties.slice(0, 3); // Show latest 3
+
   return (
     <Layout>
       <Helmet>
@@ -56,7 +60,7 @@ export default function Home() {
             </motion.p>
 
             <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-              <Link href="/services" className="px-8 py-4 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg flex items-center gap-2 justify-center hover:shadow-xl hover:shadow-saffron/20">
+              <Link href="/properties" className="px-8 py-4 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg flex items-center gap-2 justify-center hover:shadow-xl hover:shadow-saffron/20">
                   Explore Properties <ArrowRight className="w-4 h-4" />
               </Link>
               <Link href="/contact" className="px-8 py-4 border-2 border-gray-200 text-gray-900 font-medium rounded-full hover:bg-gray-50 hover:border-gray-300 transition-all flex items-center gap-2 justify-center">
@@ -76,6 +80,96 @@ export default function Home() {
           <span className="text-[10px] uppercase tracking-widest text-gray-400">Scroll</span>
           <div className="w-[1px] h-12 bg-gradient-to-b from-saffron/0 via-saffron/50 to-saffron/0" />
         </motion.div>
+      </section>
+
+      {/* Latest Properties Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-between items-end mb-12">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-4">Latest Listings</h2>
+              <p className="text-gray-600 max-w-xl">Explore our newest properties available for sale and rent.</p>
+            </div>
+            <Link href="/properties" className="hidden md:flex items-center gap-2 text-saffron font-bold hover:text-black transition-colors">
+              View All Properties <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {featuredProperties.map((prop) => (
+              <motion.div 
+                key={prop.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -8 }}
+                className="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-premium group transition-all duration-300"
+              >
+                <div className="h-64 relative overflow-hidden">
+                  <img 
+                    src={prop.image} 
+                    alt={prop.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
+                  
+                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-gray-900 shadow-sm">
+                    {prop.type}
+                  </div>
+                  <div className="absolute bottom-4 left-4">
+                    <span className="bg-saffron text-white font-bold px-4 py-2 rounded-lg shadow-lg text-lg">
+                      {prop.price}
+                    </span>
+                  </div>
+                </div>
+                
+                <div className="p-6">
+                  <div className="flex justify-between items-start mb-3">
+                     <h3 className="text-xl font-bold text-gray-900 line-clamp-1 group-hover:text-saffron transition-colors">{prop.title}</h3>
+                     {prop.status === 'Sold' && <span className="bg-red-100 text-red-700 text-xs font-bold px-2 py-1 rounded">SOLD</span>}
+                  </div>
+                  <div className="flex items-center gap-2 text-gray-500 text-sm mb-6 font-medium">
+                    <MapPin className="w-4 h-4 text-saffron" />
+                    {prop.location}
+                  </div>
+                  
+                  <div className="grid grid-cols-3 gap-4 py-6 border-t border-gray-100 mb-6">
+                    {prop.type !== "Land" ? (
+                      <>
+                        <div className="flex flex-col items-center gap-1">
+                          <Bed className="w-5 h-5 text-gray-400 group-hover:text-saffron transition-colors" />
+                          <span className="text-xs font-medium text-gray-600">{prop.beds} Beds</span>
+                        </div>
+                        <div className="flex flex-col items-center gap-1">
+                          <Bath className="w-5 h-5 text-gray-400 group-hover:text-saffron transition-colors" />
+                          <span className="text-xs font-medium text-gray-600">{prop.baths} Baths</span>
+                        </div>
+                      </>
+                    ) : (
+                       <div className="col-span-2 flex items-center gap-2 text-gray-500 text-sm">
+                        <span className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-bold">Plot / Land</span>
+                       </div>
+                    )}
+                    <div className="flex flex-col items-center gap-1">
+                      <Maximize className="w-5 h-5 text-gray-400 group-hover:text-saffron transition-colors" />
+                      <span className="text-xs font-medium text-gray-600">{prop.area}</span>
+                    </div>
+                  </div>
+
+                  <Link href="/contact" className="w-full block text-center bg-gray-50 border border-gray-200 hover:bg-saffron hover:border-saffron hover:text-white text-gray-900 py-3 rounded-xl transition-all font-bold tracking-wide">
+                      View Details
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="mt-8 text-center md:hidden">
+            <Link href="/properties" className="inline-flex items-center gap-2 text-saffron font-bold hover:text-black transition-colors">
+              View All Properties <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
       </section>
 
       {/* Featured Cities */}

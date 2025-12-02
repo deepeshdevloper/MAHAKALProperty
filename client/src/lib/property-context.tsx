@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 
 export type Property = {
   id: number;
@@ -80,7 +80,27 @@ interface PropertyContextType {
 const PropertyContext = createContext<PropertyContextType | undefined>(undefined);
 
 export function PropertyProvider({ children }: { children: ReactNode }) {
-  const [properties, setProperties] = useState<Property[]>(INITIAL_PROPERTIES);
+  // Initialize from localStorage or default
+  const [properties, setProperties] = useState<Property[]>(() => {
+    try {
+      const saved = localStorage.getItem('jsm-properties');
+      if (saved) {
+        return JSON.parse(saved);
+      }
+    } catch (e) {
+      console.error("Failed to load properties from localStorage", e);
+    }
+    return INITIAL_PROPERTIES;
+  });
+
+  // Save to localStorage whenever properties change
+  useEffect(() => {
+    try {
+      localStorage.setItem('jsm-properties', JSON.stringify(properties));
+    } catch (e) {
+      console.error("Failed to save properties to localStorage", e);
+    }
+  }, [properties]);
 
   const addProperty = (property: Omit<Property, "id">) => {
     const newId = Math.max(...properties.map(p => p.id), 0) + 1;
