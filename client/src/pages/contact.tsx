@@ -68,7 +68,7 @@ export default function Contact() {
                   { 
                     icon: UsersIcon, 
                     title: "Contact Persons", 
-                    content: "Rahul Singh\nRajesh Kushwaha" 
+                    content: "Rahul Singh\nRajesh Kushwaha: +91 9039627923" 
                   },
                   { 
                     icon: Phone, 

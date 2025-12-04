@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AnimatePresence } from "framer-motion";
 import { PropertyProvider } from "@/lib/property-context";
+import { AuthProvider } from "@/lib/auth-context";
 
 import Home from "@/pages/home";
 import About from "@/pages/about";
@@ -15,6 +16,7 @@ import Contact from "@/pages/contact";
 import AdminPage from "@/pages/admin";
 import PropertiesPage from "@/pages/properties";
 import NotFound from "@/pages/not-found";
+import Login from "@/pages/login";
 
 function Router() {
   return (
@@ -27,6 +29,7 @@ function Router() {
         <Route path="/pan-india" component={PanIndia} />
         <Route path="/contact" component={Contact} />
         <Route path="/admin" component={AdminPage} />
+        <Route path="/login" component={Login} />
         <Route path="/city/:name" component={CityPage} />
         <Route component={NotFound} />
       </Switch>
@@ -37,12 +40,14 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <PropertyProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-        </TooltipProvider>
-      </PropertyProvider>
+      <AuthProvider>
+        <PropertyProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Router />
+          </TooltipProvider>
+        </PropertyProvider>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Layout } from "@/components/layout";
 import { Helmet } from "react-helmet";
 import { motion, AnimatePresence } from "framer-motion";
@@ -18,10 +18,13 @@ import {
   Bath, 
   Maximize,
   Search,
-  Filter
+  Filter,
+  LogOut
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useProperties, Property } from "@/lib/property-context";
+import { useAuth } from "@/lib/auth-context";
+import { useLocation } from "wouter";
 
 const propertySchema = z.object({
   title: z.string().min(3, "Title is required"),
@@ -40,10 +43,20 @@ type PropertyForm = z.infer<typeof propertySchema>;
 
 export default function AdminPage() {
   const { properties, addProperty, updateProperty, deleteProperty } = useProperties();
+  const { isAuthenticated, logout } = useAuth();
+  const [, setLocation] = useLocation();
   const [isEditing, setIsEditing] = useState<number | null>(null);
   const [isAdding, setIsAdding] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const { toast } = useToast();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      setLocation("/login");
+    }
+  }, [isAuthenticated, setLocation]);
+
+  if (!isAuthenticated) return null;
 
   const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm<PropertyForm>({
     resolver: zodResolver(propertySchema),
@@ -134,12 +147,20 @@ export default function AdminPage() {
               <h1 className="text-3xl md:text-4xl font-serif font-bold text-gray-900">Property Management</h1>
               <p className="text-gray-600 mt-1">Manage your listings, add new properties, and track status.</p>
             </div>
-            <button 
-              onClick={() => { setIsAdding(true); setIsEditing(null); reset(); }}
-              className="bg-saffron text-white px-6 py-3 rounded-lg font-bold shadow-lg hover:bg-saffron/90 transition-all flex items-center gap-2"
-            >
-              <Plus className="w-5 h-5" /> Add Property
-            </button>
+            <div className="flex gap-3">
+              <button 
+                onClick={logout}
+                className="bg-white text-gray-700 border border-gray-200 px-4 py-3 rounded-lg font-bold shadow-sm hover:bg-gray-50 transition-all flex items-center gap-2"
+              >
+                <LogOut className="w-5 h-5" /> Logout
+              </button>
+              <button 
+                onClick={() => { setIsAdding(true); setIsEditing(null); reset(); }}
+                className="bg-saffron text-white px-6 py-3 rounded-lg font-bold shadow-lg hover:bg-saffron/90 transition-all flex items-center gap-2"
+              >
+                <Plus className="w-5 h-5" /> Add Property
+              </button>
+            </div>
           </div>
 
           {/* Search and Filter Bar */}

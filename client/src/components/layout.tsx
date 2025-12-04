@@ -201,7 +201,7 @@ export function Layout({ children, transparent = false }: { children: React.Reac
                 </li>
                 <li className="flex items-center gap-3">
                   <Phone className="w-4 h-4 text-saffron" />
-                  <span>+91 92430 23754</span>
+                  <span>+91 92430 23754 / +91 9039627923</span>
                 </li>
                 <li className="flex gap-4 mt-4">
                   <a
